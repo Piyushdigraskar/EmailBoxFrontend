@@ -8,12 +8,15 @@ const EmailNav = () => {
     return (
         <header className={classes.header}>
             <nav>
-                <Link to='/home'>
+                {authCtx.isLoggedIn && <Link to='/home'>
                     <div className={classes.logo}>Options</div>
-                </Link>
+                </Link>}
                 <ul>
                     {authCtx.isLoggedIn && <li>
-                        <Link to='/createEmail'>Create Email</Link>
+                        <Link to='/compose'>Compose</Link>
+                    </li>}
+                    {authCtx.isLoggedIn && <li>
+                        <Link to='/sent'>Sent</Link>
                     </li>}
                 </ul>
             </nav>

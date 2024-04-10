@@ -1,24 +1,20 @@
 import EmailLayOut from "../Layout/EmailLayOut";
 import WelcomeEmailPage from "../../Pages/WelcomeEmailPage";
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import authContext from "../../Store/Context/AuthContext";
 import LoginPage from "../../Pages/LoginPage";
 import EmailComposerPage from "../../Pages/EmailComposerPage";
 import { useContext } from "react";
 
-const EmailOptions = ()=>{
+const EmailOptions = () => {
     const authCtx = useContext(authContext);
     const isLoggedIn = authCtx.isLoggedIn;
     return (
         <EmailLayOut>
-            <Switch>
-            <Route path='/home' exact>
-                    {isLoggedIn ? <WelcomeEmailPage /> : <LoginPage />}
-                </Route>
-            <Route path='/createEmail'>
-                    {isLoggedIn ? <EmailComposerPage /> : <LoginPage />}
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path='/home' element={isLoggedIn ? <WelcomeEmailPage /> : <LoginPage />}></Route>
+                <Route path='/compose' element={isLoggedIn ? <EmailComposerPage /> : <LoginPage />}></Route>
+            </Routes>
         </EmailLayOut>
     );
 }

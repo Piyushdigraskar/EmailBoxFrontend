@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
@@ -14,17 +14,11 @@ const App = () => {
   const isLoggedIn = authCtx.isLoggedIn;
   return (
     <Layout>
-      <Switch>
-        <Route path='/' exact>
-          <HomePage />
-        </Route>
-        <Route path='/signup'>
-          <SignupPage />
-        </Route>
-        <Route path='/login'>
-          {!isLoggedIn ? <LoginPage /> : <WelcomeEmailPage />}
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/login' element={!isLoggedIn ? <LoginPage /> : <WelcomeEmailPage />} />
+      </Routes>
       <EmailOptions />
     </Layout>
   );
