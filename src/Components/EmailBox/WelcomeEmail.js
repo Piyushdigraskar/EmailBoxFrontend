@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const WelcomeEmail = ()=>{
+const WelcomeEmail = () => {
     return (
-        <Container>
-            <h1>Welcome to Email Box!</h1>
+        <Container className="text-center mt-5"> 
+            <h1>Welcome to Email Box!</h1> 
         </Container>
     );
 }

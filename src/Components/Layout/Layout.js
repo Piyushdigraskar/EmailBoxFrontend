@@ -5,8 +5,12 @@ import MainNavigation from "./MainNavigation";
 const Layout = (props)=>{
     return (
         <Fragment>
-            <MainNavigation />
-            <main>{props.children}</main>
+            <div style={{ display: 'flex', flexDirection: 'column'}}>
+                <MainNavigation />
+                <div style={{marginLeft:'13%' ,width: '87%' }}>
+                    {props.children}
+                </div>
+            </div>
         </Fragment>
     );
 }

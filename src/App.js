@@ -6,6 +6,7 @@ import LoginPage from './Pages/LoginPage';
 import SignupPage from './Pages/SignupPage';
 import WelcomeEmailPage from './Pages/WelcomeEmailPage';
 import authContext from './Store/Context/AuthContext';
+import EmailOptions from './Components/EmailBox/EmailOptions';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
           {!isLoggedIn ? <LoginPage /> : <WelcomeEmailPage />}
         </Route>
       </Switch>
+      <EmailOptions />
     </Layout>
   );
 };

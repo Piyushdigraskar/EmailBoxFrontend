@@ -1,9 +1,12 @@
 
 import authContext from "./AuthContext";
 import { useState } from "react";
-
 const AuthProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(() => {
+        // Check if token exists in localStorage
+        const token = localStorage.getItem('token');
+        return !!token; // Return true if token exists, false otherwise
+    });
     const signUpHandler = async (details) => {
         try {
             const response = await fetch(`http://localhost:4000/user/signup`, {
@@ -42,10 +45,11 @@ const AuthProvider = (props) => {
                 const responseData = await response.json(); // Extract JSON response
                 const token = responseData.token; // Access token from response
                 if (token) {
-                    localStorage.setItem('token', token); // Set token in localStorage
-                    setIsLoggedIn(true);
+                    localStorage.setItem('token', token);
+                    setIsLoggedIn(true); // Set token in localStorage
+                   
                 } else {
-                    setIsLoggedIn(false);
+                    console.log("No token");
                 }
                 console.log("user successfully logged in");
             }
