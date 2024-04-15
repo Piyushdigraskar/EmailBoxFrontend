@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import authContext from "../../Store/Context/AuthContext";
 import LoginPage from "../../Pages/LoginPage";
 import EmailComposerPage from "../../Pages/EmailComposerPage";
+import SentBoxPage from "../../Pages/SentBoxPage";
+
 import { useContext } from "react";
 
 const EmailOptions = () => {
@@ -14,9 +16,10 @@ const EmailOptions = () => {
             <Routes>
                 <Route path='/home' element={isLoggedIn ? <WelcomeEmailPage /> : <LoginPage />}></Route>
                 <Route path='/compose' element={isLoggedIn ? <EmailComposerPage /> : <LoginPage />}></Route>
+                <Route path='/sent' element={isLoggedIn ? <SentBoxPage /> : <LoginPage />}></Route>
             </Routes>
         </EmailLayOut>
     );
 }
 
-export default EmailOptions
+export default EmailOptions;

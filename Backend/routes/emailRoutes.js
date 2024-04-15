@@ -8,4 +8,6 @@ const emailController = require('../Controllers/email');
 
 router.post('/addemail',Authentication.authenticate ,emailController.addEmail);
 
+router.get('/getEmails', Authentication.authenticate, emailController.getEmails);
+
 module.exports = router;

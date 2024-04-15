@@ -1,5 +1,6 @@
 
 import {createSlice} from '@reduxjs/toolkit';
+import { setPageData } from './Pagination';
 
 const initialEmailState = {
     emails: []
@@ -11,6 +12,9 @@ const EmailSlice = createSlice({
     reducers:{
         addEmailSuccess(state, action){
             state.emails.push(action.payload);
+        },
+        getEmailsSuccess(state, action){
+          state.emails = action.payload;
         }
     }
 })
@@ -35,6 +39,36 @@ export const addEmail = emailDetails => async dispatch => {
       console.log(error);
     }
   };
+
+export const getEmail = page => async dispatch =>{
+  try {
+    const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:4000/email/getemails?page=${page}`, {
+        method:"GET",
+        headers:{
+          "Authorization": token
+        }
+      });
+      if(response.ok){
+        const data = await response.json();
+        console.log("Data from backend:", data);
+        dispatch(EmailSlice.actions.getEmailsSuccess(data.Emails))
+        dispatch(setPageData({
+          currentPage: data.currentPage,
+          hasNextPage: data.hasNextPage,
+          nextPage: data.nextPage,
+          hasPreviousPage: data.hasPreviousPage,
+          previousPage: data.previousPage,
+          lastPage: data.lastPage
+        }));
+      }
+      else{
+        throw new Error('Failed to fetch emails');
+      }
+  } catch (error) {
+    console.log(error);
+  }
+}
   
 
 export const EmailActions = EmailSlice.actions;
