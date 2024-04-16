@@ -15,6 +15,9 @@ const EmailSlice = createSlice({
         },
         getEmailsSuccess(state, action){
           state.emails = action.payload;
+        },
+        getEmailSuccess(state, action){
+          state.emails = action.payload;
         }
     }
 })
@@ -40,7 +43,7 @@ export const addEmail = emailDetails => async dispatch => {
     }
   };
 
-export const getEmail = page => async dispatch =>{
+export const getEmails = page => async dispatch =>{
   try {
     const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:4000/email/getemails?page=${page}`, {
@@ -69,7 +72,28 @@ export const getEmail = page => async dispatch =>{
     console.log(error);
   }
 }
-  
+
+export const getEmail = (mailId) =>async dispatch => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:4000/email/getemail/${mailId}`, {
+        method: "GET",
+        headers: {
+          "Authorization": token
+        }
+    });
+
+    if(response.ok){
+      const data = await response.json();
+      console.log(data.email)
+      dispatch(EmailSlice.actions.getEmailSuccess(data.email));
+    } else {
+      throw new Error('Failed to fetch a single Mail');
+    }
+  } catch (error) {
+      console.log(error);
+  }
+}
 
 export const EmailActions = EmailSlice.actions;
 

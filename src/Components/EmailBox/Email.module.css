@@ -1,0 +1,32 @@
+.emailContainer {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  .emailHeader {
+    text-align: center;
+    color: #333;
+  }
+  
+  .emailContent {
+    margin-top: 20px;
+  }
+  
+  .emailContent div {
+    margin-bottom: 10px;
+  }
+  
+  .content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    white-space: pre-line;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow-wrap: break-word;
+  }
+  

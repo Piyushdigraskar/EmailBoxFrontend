@@ -34,6 +34,9 @@ const EmailComposer = () => {
     console.log("Email Content:", textContent);
 
     // You can use emailContentRef.current to access email content if needed
+    toinputRef.current.value = '';
+    subjectInputRef.current.value = '';
+    
   };
 
   return (

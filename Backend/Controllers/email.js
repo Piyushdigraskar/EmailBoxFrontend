@@ -56,7 +56,31 @@ const getEmails = async (req, res) => {
     }
 }
 
+const getEmail = async (req, res) => {
+    const emailId = req.params.id; // Assuming the email ID is passed as a route parameter
+    const userId = req.user;
+    if (!emailId) {
+        return res.status(400).json({ success: false, error: 'Email ID is required' });
+    }
+
+    try {
+        const email = await Emails.findOne({ _id: emailId, userId: userId });
+
+        if (!email) {
+            return res.status(404).json({ error: 'Email not found' });
+        }
+
+        // You can customize the response format according to your requirements
+        res.json({ email });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Failed to get Email' });
+    }
+}
+
 module.exports = {
     addEmail,
-    getEmails
+    getEmails,
+    getEmail
 }

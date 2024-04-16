@@ -10,4 +10,6 @@ router.post('/addemail',Authentication.authenticate ,emailController.addEmail);
 
 router.get('/getEmails', Authentication.authenticate, emailController.getEmails);
 
+router.get('/getEmail/:id', Authentication.authenticate, emailController.getEmail);
+
 module.exports = router;
