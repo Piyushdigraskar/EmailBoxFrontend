@@ -18,6 +18,10 @@ const EmailSlice = createSlice({
         },
         getEmailSuccess(state, action){
           state.emails = action.payload;
+        },
+        deleteEmailSuccess(state, action){
+          const id = action.payload;
+          state.emails = state.emails.filter(email => email._id !== id);
         }
     }
 })
@@ -92,6 +96,26 @@ export const getEmail = (mailId) =>async dispatch => {
     }
   } catch (error) {
       console.log(error);
+  }
+}
+
+export const deleteEmail = (id) =>async dispatch =>{
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:4000/email/deleteemail/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": token
+        }
+    });
+    if(response.ok){
+      dispatch(EmailSlice.actions.deleteEmailSuccess(id));
+    }
+    else{
+      throw new Error('Response is not ok While deleting the email');
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 

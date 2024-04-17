@@ -19,7 +19,9 @@ const addEmail = async (req, res) => {
             to,
             subject,
             content,
-            userId: req.user._id
+            userId: req.user._id,
+            createdAt: new Date(),
+            bluetick: false
         })
         res.status(201).json('Successfully Created Email');
 
@@ -37,6 +39,7 @@ const getEmails = async (req, res) => {
         const totalEmails = await Emails.countDocuments({ userId: userId });
 
         const allEmails = await Emails.find({ userId: userId })
+            .sort({ createdAt:-1 })
             .skip((page - 1) * ITEM_PER_PAGE)
             .limit(ITEM_PER_PAGE);
 
@@ -64,7 +67,7 @@ const getEmail = async (req, res) => {
     }
 
     try {
-        const email = await Emails.findOne({ _id: emailId, userId: userId });
+        const email = await Emails.findOneAndUpdate({ _id: emailId, userId: userId }, { $set: { bluetick: true } }, { new: true });
 
         if (!email) {
             return res.status(404).json({ error: 'Email not found' });
@@ -79,8 +82,30 @@ const getEmail = async (req, res) => {
     }
 }
 
+const deleteEmail = async()=>{
+    const emailId = req.params.id; // Assuming the email ID is passed as a route parameter
+    const userId = req.user;
+    if (!emailId) {
+        return res.status(400).json({ success: false, error: 'Email ID is required' });
+    }
+    try {
+        const deletedEmail = await Emails.findByIdAndDelete({_id:emailId, userId: userId});
+        if (!deletedEmail) {
+            return res.status(404).json({ error: 'Email not found' });
+        }
+
+        res.json({ success: true, message: 'Email deleted successfully', deletedEmail });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Failed to delete Email' });
+    }
+
+}
+
 module.exports = {
     addEmail,
     getEmails,
-    getEmail
+    getEmail,
+    deleteEmail
 }

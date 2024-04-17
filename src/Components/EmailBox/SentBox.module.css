@@ -1,4 +1,5 @@
 /* SentBox.module.css */
+
 .container {
   padding: 20px;
   border: 1px solid #ccc;
@@ -46,6 +47,19 @@
   background-color: #ff6347; /* Red color for Delete button */
   color: #fff;
 }
+
 .email button.deleteButton:hover {
   background-color: #a50606;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.checkbox.blue {
+  background-color: blue;
 }

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmails } from "../../Store/redux/Email";
 import { getEmail } from "../../Store/redux/Email";
+import { deleteEmail } from "../../Store/redux/Email";
  // Update path as per your project
 import classes from "./SentBox.module.css";
 //import { v4 as uuidv4 } from 'uuid';
@@ -25,6 +26,10 @@ const SentBox = () => {
     dispatch(getEmail(mailId));
   }
 
+  const deleteMailHandler = (emailId)=> {
+    dispatch(deleteEmail(emailId));
+  }
+
   const handlePageChange = (page) => {
     dispatch(getEmails(page)); // Fetch emails for the selected page
   };
@@ -36,11 +41,12 @@ const SentBox = () => {
       {console.log(emails)}
         {Array.isArray(emails) && emails.map((email) => (
           <li key={email._id} className={classes.email}>
+            <span className={email.bluetick ? `${classes.checkbox} ${classes.blue}` : classes.checkbox}></span>
             <span>{email.to}</span> - <span>{email.subject}</span>
             <Link to='/mail'>
             <button onClick={() => singleEmail(email._id)} className={classes.viewButton}>View Email</button>
             </Link>
-            <button className={classes.deleteButton}>Delete</button>
+            <button onClick={()=> deleteMailHandler(email._id)} className={classes.deleteButton}>Delete</button>
           </li>
         ))}
       </ul>

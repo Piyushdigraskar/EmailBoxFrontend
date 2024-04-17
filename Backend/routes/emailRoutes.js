@@ -12,4 +12,6 @@ router.get('/getEmails', Authentication.authenticate, emailController.getEmails)
 
 router.get('/getEmail/:id', Authentication.authenticate, emailController.getEmail);
 
+router.get('/deleteEmail/:id', Authentication.authenticate, emailController.deleteEmail);
+
 module.exports = router;

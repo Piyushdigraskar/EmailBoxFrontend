@@ -18,6 +18,14 @@ const EmailSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users',
         required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    bluetick: {
+        type: Boolean,
+        default: false
     }
 
 })
