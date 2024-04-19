@@ -27,6 +27,7 @@ const SentBox = () => {
   }
 
   const deleteMailHandler = (emailId)=> {
+    console.log('DeleteMailHandler5 Called');
     dispatch(deleteEmail(emailId));
   }
 

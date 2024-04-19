@@ -8,10 +8,10 @@ const emailController = require('../Controllers/email');
 
 router.post('/addemail',Authentication.authenticate ,emailController.addEmail);
 
-router.get('/getEmails', Authentication.authenticate, emailController.getEmails);
+router.get('/getemails', Authentication.authenticate, emailController.getEmails);
 
-router.get('/getEmail/:id', Authentication.authenticate, emailController.getEmail);
+router.get('/getemail/:id', Authentication.authenticate, emailController.getEmail);
 
-router.get('/deleteEmail/:id', Authentication.authenticate, emailController.deleteEmail);
+router.delete('/deleteemail/:id', Authentication.authenticate, emailController.deleteEmail);
 
 module.exports = router;

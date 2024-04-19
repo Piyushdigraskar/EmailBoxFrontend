@@ -39,7 +39,7 @@ const getEmails = async (req, res) => {
         const totalEmails = await Emails.countDocuments({ userId: userId });
 
         const allEmails = await Emails.find({ userId: userId })
-            .sort({ createdAt:-1 })
+            .sort({ createdAt: -1 })
             .skip((page - 1) * ITEM_PER_PAGE)
             .limit(ITEM_PER_PAGE);
 
@@ -82,20 +82,22 @@ const getEmail = async (req, res) => {
     }
 }
 
-const deleteEmail = async()=>{
+const deleteEmail = async (req, res) => {
     const emailId = req.params.id; // Assuming the email ID is passed as a route parameter
     const userId = req.user;
+    //console.log(userId);
+    console.log('Attempting to delete email with ID:', emailId); // Add this line
     if (!emailId) {
         return res.status(400).json({ success: false, error: 'Email ID is required' });
     }
     try {
-        const deletedEmail = await Emails.findByIdAndDelete({_id:emailId, userId: userId});
+        const deletedEmail = await Emails.findByIdAndDelete({ _id: emailId, userId: userId });
         if (!deletedEmail) {
             return res.status(404).json({ error: 'Email not found' });
         }
+        console.log('Email deleted successfully:', deletedEmail);
+        res.status(200).json({ success: true, message: 'Email deleted successfully', deletedEmail });
 
-        res.json({ success: true, message: 'Email deleted successfully', deletedEmail });
-        
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Failed to delete Email' });

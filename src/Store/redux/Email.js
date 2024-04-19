@@ -21,6 +21,7 @@ const EmailSlice = createSlice({
         },
         deleteEmailSuccess(state, action){
           const id = action.payload;
+          console.log('Deleting email with ID:', id);
           state.emails = state.emails.filter(email => email._id !== id);
         }
     }
@@ -86,7 +87,7 @@ export const getEmail = (mailId) =>async dispatch => {
           "Authorization": token
         }
     });
-
+    
     if(response.ok){
       const data = await response.json();
       console.log(data.email)
@@ -99,20 +100,23 @@ export const getEmail = (mailId) =>async dispatch => {
   }
 }
 
-export const deleteEmail = (id) =>async dispatch =>{
+export const deleteEmail = (mailid) =>async dispatch =>{
   try {
+    console.log('Email ID being sent:', mailid);
     const token = localStorage.getItem('token');
-    const response = await fetch(`http://localhost:4000/email/deleteemail/${id}`, {
+    const response = await fetch(`http://localhost:4000/email/deleteemail/${mailid}`, {
         method: "DELETE",
         headers: {
           "Authorization": token
         }
     });
+    console.log('Response status:', response.status); // Add this line
     if(response.ok){
-      dispatch(EmailSlice.actions.deleteEmailSuccess(id));
+      dispatch(EmailSlice.actions.deleteEmailSuccess(mailid));
     }
     else{
-      throw new Error('Response is not ok While deleting the email');
+      const errorMessage = await response.text();
+      throw new Error(`Response is not ok While deleting the email ${errorMessage}`);
     }
   } catch (error) {
     console.log(error);
