@@ -23,6 +23,7 @@ const addEmail = async (req, res) => {
             createdAt: new Date(),
             bluetick: false
         })
+        
         res.status(201).json('Successfully Created Email');
 
     } catch (error) {
@@ -45,6 +46,7 @@ const getEmails = async (req, res) => {
 
         res.json({
             Emails: allEmails,
+            totalMails: totalEmails,
             currentPage: page,
             hasNextPage: ITEM_PER_PAGE * page < totalEmails,
             nextPage: page + 1,

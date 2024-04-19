@@ -11,7 +11,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-}
+    },
+    totalMails: {
+        type: Number,
+        default: 0
+    }
 })
 
 

@@ -3,7 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import { setPageData } from './Pagination';
 
 const initialEmailState = {
-    emails: []
+    emails: [],
+    totalMails: 0
 }
 
 const EmailSlice = createSlice({
@@ -14,7 +15,8 @@ const EmailSlice = createSlice({
             state.emails.push(action.payload);
         },
         getEmailsSuccess(state, action){
-          state.emails = action.payload;
+          state.emails = action.payload.emails;
+          state.totalMails = action.payload.totalMails;
         },
         getEmailSuccess(state, action){
           state.emails = action.payload;
@@ -60,7 +62,7 @@ export const getEmails = page => async dispatch =>{
       if(response.ok){
         const data = await response.json();
         console.log("Data from backend:", data);
-        dispatch(EmailSlice.actions.getEmailsSuccess(data.Emails))
+        dispatch(EmailSlice.actions.getEmailsSuccess({ emails: data.Emails, totalMails: data.totalMails }))
         dispatch(setPageData({
           currentPage: data.currentPage,
           hasNextPage: data.hasNextPage,
