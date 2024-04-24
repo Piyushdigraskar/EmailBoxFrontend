@@ -4,7 +4,8 @@ import { setPageData } from './Pagination';
 
 const initialEmailState = {
     emails: [],
-    totalMails: 0
+    totalMails: 0,
+    totalUnreadMails: 0
 }
 
 const EmailSlice = createSlice({
@@ -17,6 +18,7 @@ const EmailSlice = createSlice({
         getEmailsSuccess(state, action){
           state.emails = action.payload.emails;
           state.totalMails = action.payload.totalMails;
+          state.totalUnreadMails = action.payload.totalUnreadMails;
         },
         getEmailSuccess(state, action){
           state.emails = action.payload;
@@ -62,7 +64,7 @@ export const getEmails = page => async dispatch =>{
       if(response.ok){
         const data = await response.json();
         console.log("Data from backend:", data);
-        dispatch(EmailSlice.actions.getEmailsSuccess({ emails: data.Emails, totalMails: data.totalMails }))
+        dispatch(EmailSlice.actions.getEmailsSuccess({ emails: data.Emails, totalMails: data.totalMails, totalUnreadMails: data.totalUnreadMails }))
         dispatch(setPageData({
           currentPage: data.currentPage,
           hasNextPage: data.hasNextPage,

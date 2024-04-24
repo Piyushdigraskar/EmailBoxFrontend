@@ -15,6 +15,10 @@ const userSchema = new Schema({
     totalMails: {
         type: Number,
         default: 0
+    },
+    totalUnreadMails: {
+        type: Number,
+        default: 0
     }
 })
 

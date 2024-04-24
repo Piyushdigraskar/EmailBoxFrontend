@@ -14,6 +14,7 @@ const SentBox = () => {
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.email.emails) || [];
   const allMails = useSelector((state) => state.email.totalMails);
+  const unreadMails = useSelector((state) => state.email.totalUnreadMails);
   const { currentPage, hasNextPage, nextPage, hasPreviousPage, previousPage, lastPage } = useSelector((state) => state.pagination);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const SentBox = () => {
   const deleteMailHandler = (emailId) => {
     console.log('DeleteMailHandler5 Called');
     dispatch(deleteEmail(emailId));
+    dispatch(getEmails(currentPage));
   }
 
   const handlePageChange = (page) => {
@@ -41,6 +43,9 @@ const SentBox = () => {
       <h1>All Emails</h1>
       <h3>
         Total Mail Count: {allMails}
+      </h3>
+      <h3>
+        Total Unread Mail Count: {unreadMails}
       </h3>
       <ul className={classes.list}>
         {console.log(emails)}

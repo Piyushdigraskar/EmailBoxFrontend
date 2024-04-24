@@ -44,9 +44,12 @@ const getEmails = async (req, res) => {
             .skip((page - 1) * ITEM_PER_PAGE)
             .limit(ITEM_PER_PAGE);
 
+        const totalUnreadEmails = await Emails.countDocuments({ userId: userId, bluetick: false });
+
         res.json({
             Emails: allEmails,
             totalMails: totalEmails,
+            totalUnreadMails: totalUnreadEmails,
             currentPage: page,
             hasNextPage: ITEM_PER_PAGE * page < totalEmails,
             nextPage: page + 1,
