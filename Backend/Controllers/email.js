@@ -91,7 +91,7 @@ const deleteEmail = async (req, res) => {
     const emailId = req.params.id; // Assuming the email ID is passed as a route parameter
     const userId = req.user;
     //console.log(userId);
-    console.log('Attempting to delete email with ID:', emailId); // Add this line
+    //console.log('Attempting to delete email with ID:', emailId); // Add this line
     if (!emailId) {
         return res.status(400).json({ success: false, error: 'Email ID is required' });
     }
@@ -100,7 +100,7 @@ const deleteEmail = async (req, res) => {
         if (!deletedEmail) {
             return res.status(404).json({ error: 'Email not found' });
         }
-        console.log('Email deleted successfully:', deletedEmail);
+        //console.log('Email deleted successfully:', deletedEmail);
         res.status(200).json({ success: true, message: 'Email deleted successfully', deletedEmail });
 
     } catch (error) {

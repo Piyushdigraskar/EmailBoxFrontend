@@ -15,9 +15,9 @@ const EmailNav = () => {
                     {authCtx.isLoggedIn && <li>
                         <Link to='/compose'>Compose</Link>
                     </li>}
-                    {authCtx.isLoggedIn && <li>
+                    <li>
                         <Link to='/sent'>Sent</Link>
-                    </li>}
+                    </li>
                 </ul>
             </nav>
         </header>

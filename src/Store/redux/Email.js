@@ -21,7 +21,7 @@ const EmailSlice = createSlice({
           state.totalUnreadMails = action.payload.totalUnreadMails;
         },
         getEmailSuccess(state, action){
-          state.emails = action.payload;
+          state.emails = [action.payload];
         },
         deleteEmailSuccess(state, action){
           const id = action.payload;

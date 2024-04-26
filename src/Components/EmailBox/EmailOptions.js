@@ -2,10 +2,10 @@ import EmailLayOut from "../Layout/EmailLayOut";
 import WelcomeEmailPage from "../../Pages/WelcomeEmailPage";
 import { Route, Routes } from 'react-router-dom';
 import authContext from "../../Store/Context/AuthContext";
+import EmailPage from "../../Pages/EmailPage";
 import LoginPage from "../../Pages/LoginPage";
 import EmailComposerPage from "../../Pages/EmailComposerPage";
 import SentBoxPage from "../../Pages/SentBoxPage";
-import EmailPage from "../../Pages/EmailPage";
 
 import { useContext } from "react";
 
