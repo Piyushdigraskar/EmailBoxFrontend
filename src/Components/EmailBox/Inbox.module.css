@@ -1,0 +1,66 @@
+/* SentBox.module.css */
+
+.container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .email {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .email span {
+    margin-right: 10px;
+  }
+  
+  .email button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .email button.viewButton {
+    background-color: #007bff;
+    color: #fff;
+    margin-right: 5px; /* Added margin to separate buttons */
+  }
+  
+  .email button.viewButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .email button.deleteButton {
+    background-color: #ff6347; /* Red color for Delete button */
+    color: #fff;
+  }
+  
+  .email button.deleteButton:hover {
+    background-color: #a50606;
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  .checkbox.blue {
+    background-color: blue;
+  }
+  

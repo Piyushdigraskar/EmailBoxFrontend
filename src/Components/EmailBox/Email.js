@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmail } from "../../Store/redux/Email";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./Email.module.css";
 
 const Email = () => {
@@ -20,7 +20,7 @@ const Email = () => {
     console.log("Email Rerendering",email);
     return (
         <div className={classes.emailContainer}>
-            {/* <Link to='/sent'><h3>All Mails</h3></Link> */}
+            <Link to='/inbox'><h3>All Mails</h3></Link>
             <h2 className={classes.emailHeader}>Email</h2>
             <div className={classes.emailContent}>
                 <div><h2>
